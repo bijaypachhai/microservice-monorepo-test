@@ -15,7 +15,7 @@ export class UsersService implements OnModuleInit {
   private users: User[] = [];
 
   onModuleInit() {
-    for (let i = 0; i <= 1000; i++) {
+    for (let i = 0; i <= 10; i++) {
       this.create({
         username: randomUUID(),
         password: randomUUID(),

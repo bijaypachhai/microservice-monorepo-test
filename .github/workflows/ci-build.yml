@@ -1,0 +1,46 @@
+name: Build API server docker image
+
+on:
+  workflow_dispatch
+    # push:
+    #     branches: ["main"]
+env:
+    REGISTRY: ghcr.io
+
+jobs:
+    prepare:
+        runs-on: ubuntu-latest
+        outputs:
+            service-a-diff-count: ${{ steps.service_a_changes.outputs.diff-count }}
+            service-b-diff-count: ${{ steps.service_b_changes.outputs.diff-count }}
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                fetch-depth: 2
+            - id: service_a_changes
+              run: echo diff-count=`git diff HEAD~ --name-only --relative=apps/api-gateway | wc -l` >> $GITHUB_OUTPUT
+            - id: service_b_changes
+              run: echo diff-count=`git diff HEAD~ --name-only --relative=apps/auth | wc -l` >> $GITHUB_OUTPUT
+
+    Build-and-publish-image:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Login to the container registry
+              uses: docker/login-action@v3
+              with:
+                registry: ${{ env.REGISTRY }}
+                username: ${{ secrets.USERNAME }}
+                password: ${{ secrets.GH_TOKEN }}
+            
+
+            - name: Build and publish image
+              uses: docker/build-push-action@v6
+              with:
+                context: .
+                push: true
+                tags: ${{ env.REGISTRY }}/astradigital/ExpertEvent-Backend:${{ env.NEWTAG }}
+
