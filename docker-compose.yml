@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  api-gateway:
+    image: api-gateway:latest
+    ports:
+      - "3001:3001"
+    environment:
+      - port=3001
+    networks:
+      - backend-network
+    depends_on:
+      - auth
+  auth:
+    image: auth:latest
+    expose:
+      - "5000"
+    networks:
+      - backend-network
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "5000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+networks:
+  backend-network:
+    driver: bridge

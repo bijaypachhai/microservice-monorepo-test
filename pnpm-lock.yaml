@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@app/common':
+        specifier: file:./libs/common
+        version: common@file:libs/common
       '@grpc/grpc-js':
         specifier: ^1.12.6
         version: 1.12.6
@@ -2110,6 +2113,9 @@ packages:
   comment-json@4.2.5:
     resolution: {integrity: sha512-bKw/r35jR3HGt5PEPm1ljsQQGyCrR8sFGNiN5L+ykDHdpO8Smxkrkla9Yi6NkQyUrb8V54PGhfMs6NrIwtxtdw==}
     engines: {node: '>= 6'}
+
+  common@file:libs/common:
+    resolution: {directory: libs/common, type: directory}
 
   component-emitter@1.3.1:
     resolution: {integrity: sha512-T0+barUSQRTUQASh8bx02dl+DhF54GtIDY13Y3m9oWTklKbb3Wv974meRpeZ3lp1JpLVECWWNHC4vaG2XHXouQ==}
@@ -6835,6 +6841,8 @@ snapshots:
       esprima: 4.0.1
       has-own-prop: 2.0.0
       repeat-string: 1.6.1
+
+  common@file:libs/common: {}
 
   component-emitter@1.3.1: {}
 
