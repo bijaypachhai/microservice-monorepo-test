@@ -1,4 +1,4 @@
-FROM node:22.11-alpine
+FROM node:22.11-alpine AS build
 
 WORKDIR /app
 
@@ -7,10 +7,8 @@ COPY ./libs/common/src ./libs/common/
 
 RUN npm install -g pnpm && pnpm install
 
-COPY ./apps/api-gateway/ .
-RUN mkdir -p dist/auth 
-COPY ./proto/auth.proto ./dist/auth/
+COPY ./apps/auth/ .
+#RUN mkdir dist 
+#COPY ./proto/auth.proto ./dist/
 
-EXPOSE 3001
-
-CMD pnpm start:dev
+RUN pnpm build

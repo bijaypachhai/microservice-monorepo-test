@@ -8,9 +8,6 @@ import * as path from 'path';
 
 async function bootstrap() {
   const logger = new Logger('AuthModule');
-
-  const commonPath = path.join(process.cwd(), '../libs/common');
-  require.main.paths.unshift(commonPath);
   
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AuthModule,
@@ -19,6 +16,7 @@ async function bootstrap() {
       options: {
         package: AUTH_PACKAGE_NAME,
         protoPath: join(__dirname, '../auth.proto'),
+        url: 'auth:5000',
       },
     },
   );

@@ -15,6 +15,7 @@ import { join } from 'path';
         options: {
           package: AUTH_PACKAGE_NAME,
           protoPath: join(__dirname, '../../auth/auth.proto'),
+          url: 'auth:5000'
         },
       },
     ]),
