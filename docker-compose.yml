@@ -3,6 +3,10 @@ version: '3'
 services:
   api-gateway:
     image: api-gateway:latest
+    container_name: api-g
+    # build:
+    #   context: ./apps/api-gateway
+    #   dockerfile: Dockerfile.prod
     ports:
       - "3001:3001"
     environment:
@@ -13,6 +17,10 @@ services:
       - auth
   auth:
     image: auth:latest
+    container_name: auth-g
+    # build:
+    #   context: ./apps/auth
+    #   dockerfile: Dockerfile.prod
     expose:
       - "5000"
     networks:
