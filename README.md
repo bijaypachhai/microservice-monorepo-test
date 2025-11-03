@@ -25,6 +25,10 @@ $ pnpm run start:dev auth
 $ pnpm run start:prod
 ```
 
+### Refer to below link for more on setting up Prometheus for NestJS application
+
+[Link](https://medium.com/elementor-engineers/avoid-prometheus-mess-in-nestjs-1ea368e3e21e)
+
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

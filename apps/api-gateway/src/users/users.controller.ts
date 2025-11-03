@@ -6,13 +6,17 @@ import {
   Patch,
   Param,
   Delete,
-} from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto, UpdateUserDto } from '@app/common';
+} from "@nestjs/common";
+import { UsersService } from "./users.service";
+import { CreateUserDto, UpdateUserDto } from "@app/common";
+import { MetricsService } from "../metrics.service";
 
-@Controller('users')
+@Controller("users")
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly metricsService: MetricsService
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -21,25 +25,29 @@ export class UsersController {
 
   @Get()
   findAll() {
+    this.metricsService.incrementRequestCounter();
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: string) {
+    this.metricsService.incrementRequestCounter();
     return this.usersService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
+    this.metricsService.incrementRequestCounter();
     return this.usersService.update(id, updateUserDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
+    this.metricsService.incrementRequestCounter();
     return this.usersService.remove(id);
   }
 
-  @Post('email')
+  @Post("email")
   sendEmail() {
     return this.usersService.emailUsers();
   }
