@@ -14,8 +14,8 @@ import { MetricsService } from "../metrics.service";
 @Controller("users")
 export class UsersController {
   constructor(
-    private readonly usersService: UsersService,
-    private readonly metricsService: MetricsService
+    private readonly usersService: UsersService
+    // private readonly metricsService: MetricsService
   ) {}
 
   @Post()
@@ -25,25 +25,25 @@ export class UsersController {
 
   @Get()
   findAll() {
-    this.metricsService.incrementRequestCounter();
+    // this.metricsService.incrementRequestCounter();
     return this.usersService.findAll();
   }
 
   @Get(":id")
   findOne(@Param("id") id: string) {
-    this.metricsService.incrementRequestCounter();
+    // this.metricsService.incrementRequestCounter();
     return this.usersService.findOne(id);
   }
 
   @Patch(":id")
   update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
-    this.metricsService.incrementRequestCounter();
+    // this.metricsService.incrementRequestCounter();
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(":id")
   remove(@Param("id") id: string) {
-    this.metricsService.incrementRequestCounter();
+    // this.metricsService.incrementRequestCounter();
     return this.usersService.remove(id);
   }
 

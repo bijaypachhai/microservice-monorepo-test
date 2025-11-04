@@ -2,7 +2,7 @@ version: "3"
 
 services:
   api-gateway:
-    image: api-gateway:latest
+    image: api-gateway:v3
     container_name: api-g
     # build:
     #   context: ./apps/api-gateway
@@ -16,7 +16,7 @@ services:
     depends_on:
       - auth
   auth:
-    image: auth:latest
+    image: auth:v1
     container_name: auth-g
     # build:
     #   context: ./apps/auth
