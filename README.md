@@ -28,6 +28,7 @@ $ pnpm run start:prod
 ### Refer to below link for more on setting up Prometheus for NestJS application
 
 [Link](https://medium.com/elementor-engineers/avoid-prometheus-mess-in-nestjs-1ea368e3e21e)
+[Link](https://betterstack.com/community/guides/scaling-nodejs/nodejs-prometheus/) More Comprehensive Guide
 
 ## License
 
